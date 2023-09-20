@@ -20,7 +20,12 @@ const fetchColors = async ({ name, hex, compName, compHex }) => {
     console.log("Fetch complete.");
 
     // conditionals that execute based on function parameters
-    // TBD
+    if (name) {
+      // I do not have experience with case insensitive filtering, so I used MDN's documentation example based on toLowerCase
+      // I saw that regex can also be used
+      let result = colors.filter((color) => color.name.toLowerCase().includes(name.toLowerCase()));
+      return result;
+    } 
 
   // catch and log fetch error
   } catch (error) {
