@@ -1,4 +1,3 @@
-// REMEMBER TO NPM START / BUILD*****
 import fetch from 'node-fetch';
 
 const COLORS = 'https://nt-cdn.s3.amazonaws.com/colors.json';
