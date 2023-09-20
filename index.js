@@ -25,6 +25,9 @@ const fetchColors = async ({ name, hex, compName, compHex }) => {
       // I saw that regex can also be used
       let result = colors.filter((color) => color.name.toLowerCase().includes(name.toLowerCase()));
       return result;
+    } else if (hex) {
+      let result = colors.filter((color) => color.hex === hex);
+      return result;
     } 
 
   // catch and log fetch error
