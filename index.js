@@ -26,6 +26,7 @@ const fetchColors = async ({ name, hex, compName, compHex }) => {
       let result = colors.filter((color) => color.name.toLowerCase().includes(name.toLowerCase()));
       return result;
     } else if (hex) {
+      // filter array based on hex param
       let result = colors.filter((color) => color.hex === hex);
       return result;
     } 
