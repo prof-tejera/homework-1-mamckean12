@@ -29,10 +29,21 @@ const fetchColors = async ({ name, hex, compName, compHex }) => {
       // filter array based on hex param
       let result = colors.filter((color) => color.hex === hex);
       return result;
+    } else if (compName) {
+      // filter array based on compName param
+      let result = colors.filter((color) => {
+        // for each color element, return true to filter if comp.name includes compName
+        for (let i=0; i < color.comp.length; i++){
+          if (color.comp[i].name.toLowerCase().includes(compName.toLowerCase())){
+            return true;
+          }
+        }
+      });
+      return result;
     } else if (compHex) {
       // filter array based on compHex param
       let result = colors.filter((color) => {
-        // within each color element, return true to filter if comp.hex matches compHex
+        // for each color element, return true to filter if comp.hex matches compHex
         for (let i=0; i < color.comp.length; i++){
           if (color.comp[i].hex === compHex){
             return true;
