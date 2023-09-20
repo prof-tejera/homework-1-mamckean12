@@ -1,3 +1,10 @@
+/* Note to TA: I forgot to make commits as I worked on this, so I went back when I was done and 
+*  broke my code into logical pieces and committed each logical piece in sequence...hence, 
+*  the commit timeline is inaccurate...it took me much longer to create this code than
+*  it would appear when looking at the commit timing (in particular, I struggled with the 
+*  compName/compHex filtering a lot...wasn't sure the best way to access the nested objects).
+*/
+
 import fetch from 'node-fetch';
 
 const COLORS = 'https://nt-cdn.s3.amazonaws.com/colors.json';
