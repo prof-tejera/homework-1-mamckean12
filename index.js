@@ -51,7 +51,6 @@ const fetchColors = async ({ name, hex, compName, compHex }) => {
       });
       return result;
     }
-
   // catch and log fetch error
   } catch (error) {
     console.error(`Download error: ${error.message}`);
