@@ -1,18 +1,60 @@
 import fetch from 'node-fetch';
-// Recommend using node-fetch for those familiar with JS fetch
 
 const COLORS = 'https://nt-cdn.s3.amazonaws.com/colors.json';
 
-/**
- * @param name filter for color name
- * @param hex filter for color hex code
- * @param compName filter for complementary color name
- * @param compHex filter for complementary color hex code
- * @returns Promise
- */
-const fetchColors = ({ name, hex, compName, compHex }) => {
-  throw Error('Not implemented');
+// async function to fetch colors json and execute commands based on function parameters
+const fetchColors = async ({ name, hex, compName, compHex }) => {
+
+  // fetch colors json
+  try {
+    const response = await fetch(COLORS);
+
+    // throw error if network issue (rather than fetch issue) 
+    if (!response.ok) {
+      throw new Error(`Network response was not OK: ${error.message}`);
+    }
+
+    // await successful fetch then log complete message
+    const colors = await response.json();
+    console.log("Fetch complete.");
+
+    // conditionals that execute based on function parameters
+    if (name) {
+      // I do not have experience with case insensitive filtering, so I used MDN's documentation example based on toLowerCase
+      // I saw that regex can also be used
+      let result = colors.filter((color) => color.name.toLowerCase().includes(name.toLowerCase()));
+      return result;
+    } else if (hex) {
+      // filter array based on hex param
+      let result = colors.filter((color) => color.hex === hex);
+      return result;
+    } else if (compName) {
+      // filter array based on compName param
+      let result = colors.filter((color) => {
+        // for each color element, return true to filter if comp.name includes compName
+        for (let i=0; i < color.comp.length; i++){
+          if (color.comp[i].name.toLowerCase().includes(compName.toLowerCase())){
+            return true;
+          }
+        }
+      });
+      return result;
+    } else if (compHex) {
+      // filter array based on compHex param
+      let result = colors.filter((color) => {
+        // for each color element, return true to filter if comp.hex matches compHex
+        for (let i=0; i < color.comp.length; i++){
+          if (color.comp[i].hex === compHex){
+            return true;
+          }
+        }
+      });
+      return result;
+    }
+  // catch and log fetch error
+  } catch (error) {
+    console.error(`Download error: ${error.message}`);
+  } 
 };
 
-// Leave this here
 export default fetchColors;
