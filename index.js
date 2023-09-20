@@ -29,7 +29,18 @@ const fetchColors = async ({ name, hex, compName, compHex }) => {
       // filter array based on hex param
       let result = colors.filter((color) => color.hex === hex);
       return result;
-    } 
+    } else if (compHex) {
+      // filter array based on compHex param
+      let result = colors.filter((color) => {
+        // within each color element, return true to filter if comp.hex matches compHex
+        for (let i=0; i < color.comp.length; i++){
+          if (color.comp[i].hex === compHex){
+            return true;
+          }
+        }
+      });
+      return result;
+    }
 
   // catch and log fetch error
   } catch (error) {
